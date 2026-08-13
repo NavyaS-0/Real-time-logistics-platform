@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Logistics Tracking Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🚚 <span>Logistics Tracker</span>
+        </div>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            Tracking System Online
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+        <!-- Hero Section -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    🚚 REAL-TIME TRACKING
+                </div>
+
+                <h1>
+                    Track Your Shipment
+                </h1>
+
+                <p>
+                    Monitor your shipment location, delivery status,
+                    and complete journey in real time.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SEARCH ================= -->
+
+        <section class="search-card">
+
+            <div class="search-header">
+
+                <div>
+                    <h2>Track a Shipment</h2>
+
+                    <p>
+                        Enter your shipment ID to view the latest tracking information.
+                    </p>
+                </div>
+
+                <div class="search-icon">
+                    🔎
+                </div>
+
+            </div>
+
+
+            <div class="search-row">
+
+                <input
+                    type="number"
+                    id="shipmentId"
+                    placeholder="Enter Shipment ID"
+                    min="1"
+                >
+
+                <button
+                    id="trackButton"
+                    onclick="trackShipment()"
+                >
+                    Track Shipment
+                </button>
+
+            </div>
+
+
+            <div class="search-hint">
+                💡 Enter a valid shipment ID, for example <strong>1</strong>
+            </div>
+
+        </section>
+
+
+        <!-- ================= CURRENT STATUS ================= -->
+
+        <section class="current-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>📦 Current Shipment Status</h2>
+
+                    <p>
+                        Latest information for your shipment
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div
+                id="currentStatus"
+                class="status-card"
+            >
+
+                <!-- Default empty state -->
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        📦
+                    </div>
+
+                    <h3>
+                        No Shipment Selected
+                    </h3>
+
+                    <p>
+                        Enter a shipment ID above to view the latest status.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= JOURNEY ================= -->
+
+        <section class="history-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        📍 Shipment Journey
+                    </h2>
+
+                    <p>
+                        Complete tracking history
+                    </p>
+
+                </div>
+
+                <div class="journey-badge">
+                    LIVE
+                </div>
+
+            </div>
+
+
+            <div
+                id="history"
+                class="timeline"
+            >
+
+                <!-- Default empty state -->
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        🗺️
+                    </div>
+
+                    <h3>
+                        No Tracking History
+                    </h3>
+
+                    <p>
+                        Enter a shipment ID to view its complete journey.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="info-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        ⚡ How Tracking Works
+                    </h2>
+
+                    <p>
+                        Follow your shipment from origin to destination.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-grid">
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        🔎
+                    </div>
+
+                    <h3>
+                        Enter ID
+                    </h3>
+
+                    <p>
+                        Enter your shipment ID to retrieve its tracking information.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        📍
+                    </div>
+
+                    <h3>
+                        Track Location
+                    </h3>
+
+                    <p>
+                        View the latest location and movement history of your shipment.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        🚚
+                    </div>
+
+                    <h3>
+                        Follow Journey
+                    </h3>
+
+                    <p>
+                        See every location and status update throughout the journey.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div class="footer-title">
+                🚚 Logistics Tracking Platform
+            </div>
+
+            <p>
+                Real-Time Logistics & Shipment Tracking Platform
+            </p>
+
+            <p class="footer-small">
+                Tracking Service • PostgreSQL • Spring Boot • Kafka
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

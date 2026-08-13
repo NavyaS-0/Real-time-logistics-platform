@@ -1,0 +1,13 @@
+### Get alerts
+GET http://localhost:8001/api/alerts
+
+### Create alert
+POST http://localhost:8001/api/alerts
+Content-Type: application/json
+
+{
+  "shipment_id": 1,
+  "location": "Bangalore",
+  "status": "OUT_FOR_DELIVERY",
+  "message": "Shipment is out for delivery"
+}

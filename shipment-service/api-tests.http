@@ -1,0 +1,40 @@
+### Get all shipments
+GET http://localhost:8081/api/shipments
+
+### Get tracking history for shipment 1
+GET http://localhost:8081/api/shipments/1/tracking
+
+### Add tracking event
+POST http://localhost:8081/api/shipments/1/tracking
+Content-Type: application/json
+
+{
+  "location": "Bangalore",
+  "status": "IN_TRANSIT"
+}
+
+### Get all shipments
+GET http://localhost:8081/api/shipments
+
+### Get shipment by ID
+GET http://localhost:8081/api/shipments/1
+
+### Update shipment status
+PUT http://localhost:8081/api/shipments/1/status?status=OUT_FOR_DELIVERY
+
+### Assign customer to shipment
+PUT http://localhost:8081/api/shipments/1/customer
+Content-Type: application/json
+
+{
+  "customerId": 1
+}
+
+### Add tracking event
+POST http://localhost:8081/api/shipments/1/tracking
+Content-Type: application/json
+
+{
+  "location": "Bangalore",
+  "status": "OUT_FOR_DELIVERY"
+}

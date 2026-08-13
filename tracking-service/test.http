@@ -1,0 +1,45 @@
+### Add tracking location - Chennai
+POST http://localhost:8082/api/tracking
+Content-Type: application/json
+
+{
+  "shipmentId": 1,
+  "location": "Chennai",
+  "status": "IN_TRANSIT"
+}
+
+
+### Get tracking history
+GET http://localhost:8082/api/tracking/1
+
+
+### Get latest location
+GET http://localhost:8082/api/tracking/1/latest
+
+
+### Add tracking location - Bangalore
+POST http://localhost:8082/api/tracking
+Content-Type: application/json
+
+{
+  "shipmentId": 1,
+  "location": "Bangalore",
+  "status": "OUT_FOR_DELIVERY"
+}
+
+
+### Get ETA
+GET http://localhost:8000/api/eta/1
+
+### Test alert
+POST http://localhost:8082/api/tracking
+Content-Type: application/json
+
+{
+  "shipmentId": 1,
+  "location": "Bangalore",
+  "status": "OUT_FOR_DELIVERY"
+}
+
+### Get all alerts
+GET http://localhost:8001/api/alerts

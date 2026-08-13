@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_DB: logistics
       POSTGRES_USER: logistics_user
-      POSTGRES_PASSWORD: logistics_pass
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-logistics_pass}
 
     ports:
       - "5432:5432"
@@ -42,7 +42,7 @@ services:
       KAFKA_PROCESS_ROLES: broker,controller
 
       KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
 
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
@@ -57,6 +57,82 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
 
       KAFKA_NUM_PARTITIONS: 3
+
+
+  shipment-service:
+    image: logistics-shipment-service:latest
+    container_name: logistics-shipment-service
+    restart: unless-stopped
+
+    ports:
+      - "8081:8081"
+
+    depends_on:
+      - postgres
+      - kafka
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/logistics
+      SPRING_DATASOURCE_USERNAME: logistics_user
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-logistics_pass}
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+
+  tracking-service:
+    image: logistics-tracking-service:latest
+    container_name: logistics-tracking-service
+    restart: unless-stopped
+
+    ports:
+      - "8082:8082"
+
+    depends_on:
+      - postgres
+      - kafka
+      - redis
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/logistics?options=-c%20TimeZone%3DUTC
+      SPRING_DATASOURCE_USERNAME: logistics_user
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-logistics_pass}
+
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+
+
+  eta-service:
+    image: logistics-eta-service:latest
+    container_name: logistics-eta-service
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - kafka
+      - redis
+
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+
+  alert-service:
+    image: logistics-alert-service:latest
+    container_name: logistics-alert-service
+    restart: unless-stopped
+
+    ports:
+      - "8001:8001"
+
+    depends_on:
+      - kafka
+
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
 
 volumes:

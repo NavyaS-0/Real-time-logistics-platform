@@ -1,0 +1,12 @@
+### Calculate ETA
+POST http://localhost:8083/api/eta
+Content-Type: application/json
+
+{
+  "distance_km": 350,
+  "speed_kmph": 55,
+  "delay_minutes": 10
+}
+
+### Get ETA for shipment 1
+GET http://localhost:8083/api/eta/1
