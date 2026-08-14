@@ -60,6 +60,9 @@ services:
 
 
   shipment-service:
+    build:
+      context: ../shipment-service
+      dockerfile: dockerfile
     image: logistics-shipment-service:latest
     container_name: logistics-shipment-service
     restart: unless-stopped
@@ -79,6 +82,9 @@ services:
 
 
   tracking-service:
+    build:
+      context: ../tracking-service
+      dockerfile: dockerfile
     image: logistics-tracking-service:latest
     container_name: logistics-tracking-service
     restart: unless-stopped
@@ -95,14 +101,15 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/logistics?options=-c%20TimeZone%3DUTC
       SPRING_DATASOURCE_USERNAME: logistics_user
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-logistics_pass}
-
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
 
 
   eta-service:
+    build:
+      context: ../eta-service
+      dockerfile: dockerfile
     image: logistics-eta-service:latest
     container_name: logistics-eta-service
     restart: unless-stopped
@@ -121,6 +128,9 @@ services:
 
 
   alert-service:
+    build:
+      context: ../alert-service
+      dockerfile: dockerfile
     image: logistics-alert-service:latest
     container_name: logistics-alert-service
     restart: unless-stopped
