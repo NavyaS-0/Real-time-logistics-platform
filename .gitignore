@@ -2,9 +2,6 @@
 target/
 *.class
 
-# Maven
-.mvn/
-
 # Python
 __pycache__/
 *.py[cod]
